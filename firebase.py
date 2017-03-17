@@ -8,7 +8,4 @@ def firebaseget():
 	data = data.values()
 	return data
 
-@app.route('/fetchdata')
-def fetchdata():
-	data = firebaseget()
-	return json.dumps(data)
+

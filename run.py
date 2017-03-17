@@ -2,14 +2,14 @@
 
 
 from flask import Flask, request,jsonify
-#import mraa
+import mraa
 import json
-#mport firebase
+import firebase
 import thread
 import time
 from light import ldr_getvalues,ledon,ledoff,xchangemode
 from servo import fanoff,fanon,autofanon,changemode
-#import pyupm_grove as grove
+import pyupm_grove as grove
 
 app = Flask(__name__)
 
@@ -21,11 +21,11 @@ app = Flask(__name__)
 
 
 
-#db = firebase.FirebaseApplication('https://homeautomation-890be.firebaseio.com/',None)
+db = firebase.FirebaseApplication('https://homeautomation-890be.firebaseio.com/',None)
 
 
-#light = grove.GroveLight(1)
-#pwm = mraa.Pwm(5)
+light = grove.GroveLight(1)
+pwm = mraa.Pwm(5)
 
 
 
@@ -57,10 +57,10 @@ def ledmanipulate():
     print data
     if data['state'] =="1":
         ledon()
-#       firebasepush(data)
+       firebasepush(data)
     else:
         ledoff()
-#            firebasepush(data)
+            firebasepush(data)
     return jsonify({
         'message':'success'
         })
@@ -76,11 +76,11 @@ def setfanmode():
 	if data['mode']=="0":
 		changemode()
 		print "manual"
-#		firebasepush(data)
+		firebasepush(data)
 	else:
 		thread.start_new_thread( autofanon, () )
 		print "fan on"
-#		firebasepush(data)
+		firebasepush(data)
 	return jsonify({
 			'message':'mode set'
 			})
@@ -96,11 +96,11 @@ def fanmanipulate():
 	if data['state'] == "1":
 		print "fan turned on"
 		fanon()
-#		firebasepush(data)
+		firebasepush(data)
 	else:
 		print "fan turned off"
 		fanoff()
-#		firebasepush(data)
+		firebasepush(data)
 	return jsonify({
 			'message':'success'
 			})

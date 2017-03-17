@@ -204,22 +204,16 @@ class Servo:
 
 
 # Create a new servo object with a reference name
-#myServo = Servo("First Servo")
+myServo = Servo("First Servo")
 
 	# Attaches the servo to pin 3 in Arduino Expansion board
-#myServo.attach(3)
+myServo.attach(3)
 
 
 def autofanon():
-#	global myServo
+	global myServo
 	global y
 	y=1
-	while y==1:
-		time.sleep(0.3)
-		print "temp readings"
-
-
-'''
 	temp=grove.GroveTemp(0)
 	roomtemp=19
 	avg=0
@@ -250,13 +244,15 @@ def autofanon():
 	else :
 		print "Switch off the AC or decrease fan speed"
 	del temp
-'''
+
 
 def fanon():
 	changemode()
 	print "Fan on"
-'''
-	while True:
+	global y
+	y=1
+
+	while y==1:
 				# From 0 to 180 degrees
 		for angle in range(0,180):
 			myServo.write(angle)
@@ -267,10 +263,10 @@ def fanon():
 			myServo.write(angle)
 			time.sleep(0.005)
 
-'''
+
 
 def fanoff():
 	changemode()
 	global myServo
-#	myServo.write(0)
+	myServo.write(0)
 	print "Fan off"

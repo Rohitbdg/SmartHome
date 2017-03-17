@@ -28,7 +28,10 @@ light = grove.GroveLight(1)
 pwm = mraa.Pwm(5)
 
 
-
+@app.route('/fetchdata')
+def fetchdata():
+	data = firebaseget()
+	return json.dumps(data)
 
 ##LIGHT
 
